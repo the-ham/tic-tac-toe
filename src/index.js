@@ -58,6 +58,17 @@ class Game extends React.Component {
   }
 
   handleClick(i) {
+    const locations = [
+      [1, 1],
+      [2, 1],
+      [3, 1],
+      [1, 2],
+      [2, 2],
+      [3, 2],
+      [1, 3],
+      [2, 3],
+      [3, 3]
+    ]
     const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
@@ -68,7 +79,8 @@ class Game extends React.Component {
     this.setState({
       history: history.concat([
         {
-          squares: squares
+          squares: squares,
+          location: locations[i],
         }
       ]),
       stepNumber: history.length,
@@ -90,7 +102,7 @@ class Game extends React.Component {
 
     const moves = history.map((step, move) => {
       const desc = move ?
-        'Go to move #' + move :
+        `Go to move ${move}, position: ${step.location}` :
         'Go to game start';
       return (
         <li key={move}>
